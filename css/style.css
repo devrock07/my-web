@@ -892,6 +892,54 @@ body[data-theme="light"] .theme-icon.sun {
   margin-top: 2.2rem;
 }
 
+.skill-bars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 3rem;
+}
+
+.skill-meter {
+  padding: 1.4rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.skill-meter div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.skill-meter strong {
+  color: var(--accent-secondary);
+}
+
+.skill-meter i {
+  position: relative;
+  display: block;
+  height: 0.9rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.skill-meter i::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--level);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.28);
+}
+
 .skill-tag {
   display: inline-flex;
   align-items: center;
@@ -1054,6 +1102,103 @@ body[data-theme="light"] .theme-icon.sun {
   align-items: center;
   margin-top: 2rem;
   overflow: hidden;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  min-height: 31rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.featured-project {
+  grid-column: span 2;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(56, 189, 248, 0.14), transparent 24rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02)),
+    var(--panel);
+}
+
+.project-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-topline span,
+.project-topline small {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--accent-secondary);
+  font-size: 1.15rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.project-card h3 {
+  color: var(--text-main);
+  font-size: clamp(2.4rem, 3vw, 3.4rem);
+  line-height: 1;
+}
+
+.project-card p {
+  color: var(--text-muted);
+  font-size: 1.62rem;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.project-stack span {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 4.2rem;
+  padding: 1rem 1.35rem;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #f8fbff;
+  font-size: 1.35rem;
+  font-weight: 900;
+  transition: var(--transition);
+}
+
+.project-links a:hover {
+  transform: translateY(-3px);
+  background: var(--accent-secondary);
 }
 
 .spotify-album-art {
@@ -1229,13 +1374,7 @@ body[data-theme="light"] .theme-icon.sun {
 }
 
 .discord-activity-icon.has-art::after {
-  content: "";
-  inset: auto 0.6rem 0.6rem auto;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 999px;
-  background: var(--accent-secondary);
-  box-shadow: 0 0 0 3px rgba(2, 5, 11, 0.72);
+  display: none;
 }
 
 .discord-activity-details {
@@ -1374,6 +1513,14 @@ body[data-theme="light"] .theme-icon.sun {
   .social-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured-project {
+    grid-column: span 2;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1441,6 +1588,15 @@ body[data-theme="light"] .theme-icon.sun {
 
   .social-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-grid,
+  .skill-bars {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-project {
+    grid-column: span 1;
   }
 }
 
@@ -1546,10 +1702,39 @@ body[data-theme="light"] .secondary-cta {
 }
 
 body[data-theme="light"] .hero-stats span,
-body[data-theme="light"] .skill-tag {
+body[data-theme="light"] .skill-tag,
+body[data-theme="light"] .skill-meter,
+body[data-theme="light"] .project-stack span {
   border-color: rgba(2, 132, 199, 0.24);
   background: rgba(239, 246, 255, 0.9);
   color: #0f172a;
+}
+
+body[data-theme="light"] .skill-meter i {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+body[data-theme="light"] .project-card h3,
+body[data-theme="light"] .skill-meter div {
+  color: #07111f;
+}
+
+body[data-theme="light"] .project-card p {
+  color: #334155;
+}
+
+body[data-theme="light"] .project-topline span,
+body[data-theme="light"] .project-topline small {
+  border-color: rgba(2, 132, 199, 0.24);
+  background: rgba(2, 132, 199, 0.08);
+  color: #0369a1;
+}
+
+body[data-theme="light"] .featured-project {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(2, 132, 199, 0.09), transparent 24rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.92)),
+    var(--panel);
 }
 
 body[data-theme="light"] .skill-tag i,
@@ -1626,10 +1811,6 @@ body[data-theme="light"] .discord-activity.is-spotify {
 body[data-theme="light"] .discord-activity-icon {
   background: linear-gradient(135deg, #dbeafe, #bae6fd);
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
-}
-
-body[data-theme="light"] .discord-activity-icon.has-art::after {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.82);
 }
 
 body[data-theme="light"] .spotify-progress-container {

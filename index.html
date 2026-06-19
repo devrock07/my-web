@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css?v=16">
+  <link rel="stylesheet" type="text/css" href="css/style.css?v=18">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='60' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'>D</text></svg>">
   <meta name="description" content="Dev Bhakat's portfolio and social links">
 </head>
@@ -36,6 +36,7 @@
       <nav class="navbar" aria-label="Primary navigation">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
+        <a href="#projects">Projects</a>
         <a href="#github">GitHub</a>
         <a href="#portfolio">Socials</a>
       </nav>
@@ -106,8 +107,8 @@
       <div class="about-bento">
         <div class="bento-card about-intro" data-tilt>
           <h2>The Architect.</h2>
-          <p>I focus on dense, information-rich user interfaces that blend modern web aesthetics with raw performance. Online, I am known as <b>devrock</b> or <b>ZenithSenpai</b>.</p>
-          <p>Languages: English, Hindi, Bengali.</p>
+          <p>I break code, then make it better. Most of my public work lives around Discord bots, web tools, automation experiments, and polished interfaces that feel fast and alive.</p>
+          <p>Known online as <b>devrock</b> or <b>ZenithSenpai</b>. Languages: English, Hindi, Bengali.</p>
         </div>
 
         <div class="bento-card stats-card" data-tilt>
@@ -117,8 +118,8 @@
         </div>
 
         <div class="bento-card skills-card" data-tilt>
-          <h3>Tech Stack & OS Environment</h3>
-          <p>The tools I use daily to craft digital solutions.</p>
+          <h3>Skill Signal</h3>
+          <p>Based on my GitHub footprint: JavaScript-heavy builds, TypeScript/Svelte web work, Python utilities, and daily Windows/Linux tooling.</p>
           <div class="skills-container">
             <span class="skill-tag"><i class='bx bxl-javascript'></i> JavaScript</span>
             <span class="skill-tag"><i class='bx bxl-nodejs'></i> Node.js</span>
@@ -127,6 +128,28 @@
             <span class="skill-tag"><i class='bx bxl-windows'></i> Windows</span>
             <span class="skill-tag"><i class="fa-brands fa-linux"></i> Linux OS</span>
             <span class="skill-tag"><i class="fa-solid fa-terminal"></i> Debian</span>
+          </div>
+          <div class="skill-bars" aria-label="Skill progression">
+            <div class="skill-meter" style="--level: 92%">
+              <div><span>JavaScript / Node.js</span><strong>92%</strong></div>
+              <i></i>
+            </div>
+            <div class="skill-meter" style="--level: 78%">
+              <div><span>Bot Development</span><strong>78%</strong></div>
+              <i></i>
+            </div>
+            <div class="skill-meter" style="--level: 72%">
+              <div><span>Frontend UI</span><strong>72%</strong></div>
+              <i></i>
+            </div>
+            <div class="skill-meter" style="--level: 62%">
+              <div><span>TypeScript / Svelte</span><strong>62%</strong></div>
+              <i></i>
+            </div>
+            <div class="skill-meter" style="--level: 56%">
+              <div><span>Python / Automation</span><strong>56%</strong></div>
+              <i></i>
+            </div>
           </div>
         </div>
       </div>
@@ -158,6 +181,94 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="projects" class="scroll-animate">
+      <h2 class="heading">Project <span>Showcase</span></h2>
+      <div class="project-grid">
+        <article class="project-card bento-card featured-project" data-tilt>
+          <div class="project-topline">
+            <span>Featured</span>
+            <small>32 stars</small>
+          </div>
+          <h3>Pogy-Bot</h3>
+          <p>A popular JavaScript Discord bot project and the strongest public repo on my GitHub by stars and forks.</p>
+          <div class="project-stack">
+            <span>JavaScript</span>
+            <span>Node.js</span>
+            <span>Discord Bot</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/devrock07/Pogy-Bot" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i> GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card bento-card" data-tilt>
+          <div class="project-topline">
+            <span>Web Platform</span>
+            <small>Live demo</small>
+          </div>
+          <h3>CodexDev</h3>
+          <p>A TypeScript web project with a live site, showing the cleaner frontend/product side of my work.</p>
+          <div class="project-stack">
+            <span>TypeScript</span>
+            <span>Web</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/devrock07/CodexDev" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i> GitHub</a>
+            <a href="https://codexdevs.in/" target="_blank" rel="noopener noreferrer"><i class="bx bx-link-external"></i> Live</a>
+          </div>
+        </article>
+
+        <article class="project-card bento-card" data-tilt>
+          <div class="project-topline">
+            <span>Recent</span>
+            <small>Java</small>
+          </div>
+          <h3>nermux</h3>
+          <p>A newer Java repo that broadens the stack beyond web scripts and shows I keep experimenting.</p>
+          <div class="project-stack">
+            <span>Java</span>
+            <span>Tooling</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/devrock07/nermux" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i> GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card bento-card" data-tilt>
+          <div class="project-topline">
+            <span>Interface</span>
+            <small>Svelte</small>
+          </div>
+          <h3>AniMc</h3>
+          <p>A Svelte project from my pinned repos, useful for showing I am not only building backend bots.</p>
+          <div class="project-stack">
+            <span>Svelte</span>
+            <span>Frontend</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/devrock07/AniMc" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i> GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card bento-card" data-tilt>
+          <div class="project-topline">
+            <span>Current Site</span>
+            <small>CSS</small>
+          </div>
+          <h3>my-web</h3>
+          <p>This portfolio itself: animated bento layout, live presence cards, GitHub widgets, and theme transitions.</p>
+          <div class="project-stack">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Vanilla JS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/devrock07/my-web" target="_blank" rel="noopener noreferrer"><i class="bx bxl-github"></i> GitHub</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -246,7 +357,7 @@
     <p>Copyright &copy; 2026 Dev Bhakat</p>
   </footer>
 
-  <script src="js/script.js?v=16"></script>
+  <script src="js/script.js?v=17"></script>
 </body>
 
 </html>
