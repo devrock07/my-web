@@ -964,6 +964,19 @@ body[data-theme="light"] .theme-icon.sun {
   font-size: 1.6rem;
 }
 
+.discord-bio {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+}
+
+.discord-activity-time {
+  color: var(--accent-tertiary);
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
 .discord-activity {
   display: flex;
   gap: 1rem;

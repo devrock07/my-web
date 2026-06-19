@@ -192,6 +192,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function formatElapsedTime(startTimestampMs) {
+    const now = Date.now();
+    const elapsed = now - startTimestampMs;
+    const seconds = Math.floor(elapsed / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) {
+      return `${days}d ${hours % 24}h ${minutes % 60}m`;
+    } else if (hours > 0) {
+      return `${hours}h ${minutes % 60}m`;
+    } else if (minutes > 0) {
+      return `${minutes}m`;
+    } else {
+      return 'Just started';
+    }
+  }
+
   function updateDiscordProfile(data) {
     const { discord_user, activities, discord_status } = data;
     
@@ -224,6 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const activityNameEl = document.getElementById('discord-activity-name');
     const activityDetailsEl = document.getElementById('discord-activity-details');
     const activityStateEl = document.getElementById('discord-activity-state');
+    const activityTimeEl = document.getElementById('discord-activity-time');
     
     if (activities && activities.length > 0) {
       const activity = activities[0];
@@ -255,6 +275,15 @@ document.addEventListener("DOMContentLoaded", function () {
       if (activityNameEl) activityNameEl.textContent = activity.name || 'No activity';
       if (activityDetailsEl) activityDetailsEl.textContent = activity.details || '';
       if (activityStateEl) activityStateEl.textContent = activity.state || '';
+      
+      // Update elapsed time if we have a start timestamp
+      if (activityTimeEl && activity.timestamps && activity.timestamps.start) {
+        const elapsed = formatElapsedTime(activity.timestamps.start);
+        activityTimeEl.textContent = `for ${elapsed}`;
+        activityTimeEl.style.display = 'block';
+      } else if (activityTimeEl) {
+        activityTimeEl.style.display = 'none';
+      }
     } else {
       // No active activity
       if (activityContainer) activityContainer.style.display = 'none';
