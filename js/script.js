@@ -307,6 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (spotifyAlbumArt) {
         spotifyAlbumArt.style.backgroundImage = `url('${spotifyData.album_art_url}')`;
+        spotifyAlbumArt.classList.add('has-album-art');
       }
       if (spotifyTrack) {
         spotifyTrack.textContent = spotifyData.song;
@@ -328,6 +329,9 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       spotifyCard.style.display = 'none';
       spotifyOffline.style.display = 'flex';
+      if (spotifyAlbumArt) {
+        spotifyAlbumArt.classList.remove('has-album-art');
+      }
     }
   }
 

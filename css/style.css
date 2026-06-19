@@ -1044,8 +1044,14 @@ body[data-theme="light"] .theme-icon.sun {
   min-width: 0;
 }
 
+.whats-up-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
 .spotify-icon {
-  color: #1db954;
+  color: #2563eb;
   font-size: 2rem;
   width: fit-content;
 }
@@ -1078,10 +1084,44 @@ body[data-theme="light"] .theme-icon.sun {
 
 .spotify-progress {
   height: 100%;
-  background: #1db954;
+  background: #2563eb;
   border-radius: 999px;
   width: 0%;
   transition: width 0.5s linear;
+}
+
+.spotify-album-art {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotify-album-art::after {
+  content: '\f1bc';
+  font-family: 'Boxicons';
+  font-size: 4rem;
+  color: white;
+  opacity: 0.7;
+}
+
+.spotify-album-art.has-album-art::after {
+  display: none;
+}
+
+.spotify-offline-art {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.spotify-offline-art::after {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
