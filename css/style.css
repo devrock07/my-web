@@ -997,8 +997,19 @@ body[data-theme="light"] .theme-icon.sun {
 
 .github-stat-card {
   width: 100%;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   transition: transform 0.3s ease;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.github-stat-card img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 .github-stat-card:hover {
