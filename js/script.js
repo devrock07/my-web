@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateDiscordProfile(data) {
-    const { discord_user, activities, discord_status } = data;
+    const { discord_user, activities, discord_status, spotify } = data;
     
     // Update avatar
     const avatarEl = document.getElementById('discord-avatar');
@@ -288,11 +288,73 @@ document.addEventListener("DOMContentLoaded", function () {
       // No active activity
       if (activityContainer) activityContainer.style.display = 'none';
     }
+
+    // Update Spotify
+    updateSpotify(spotify);
+  }
+
+  function updateSpotify(spotifyData) {
+    const spotifyCard = document.getElementById('spotify-card');
+    const spotifyOffline = document.getElementById('spotify-offline');
+    const spotifyAlbumArt = document.getElementById('spotify-album-art');
+    const spotifyTrack = document.getElementById('spotify-track');
+    const spotifyArtist = document.getElementById('spotify-artist');
+    const spotifyProgress = document.getElementById('spotify-progress');
+
+    if (spotifyData) {
+      spotifyCard.style.display = 'flex';
+      spotifyOffline.style.display = 'none';
+
+      if (spotifyAlbumArt) {
+        spotifyAlbumArt.style.backgroundImage = `url('${spotifyData.album_art_url}')`;
+      }
+      if (spotifyTrack) {
+        spotifyTrack.textContent = spotifyData.song;
+      }
+      if (spotifyArtist) {
+        spotifyArtist.textContent = spotifyData.artist;
+      }
+
+      // Calculate progress
+      if (spotifyProgress && spotifyData.timestamps) {
+        const now = Date.now();
+        const start = spotifyData.timestamps.start;
+        const end = spotifyData.timestamps.end;
+        const duration = end - start;
+        const elapsed = now - start;
+        const progressPercent = Math.min(100, Math.max(0, (elapsed / duration) * 100));
+        spotifyProgress.style.width = `${progressPercent}%`;
+      }
+    } else {
+      spotifyCard.style.display = 'none';
+      spotifyOffline.style.display = 'flex';
+    }
+  }
+
+  // Scroll animations
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
   }
 
   // Fetch data immediately and every 15 seconds
   fetchLanyardData();
   setInterval(fetchLanyardData, 15000);
+  initScrollAnimations();
 
   // --- 3D Tilted Card & Bento Shimmer Effect ---
   // Using querySelectorAll for all cards tagged with data-tilt

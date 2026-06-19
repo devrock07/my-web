@@ -234,32 +234,43 @@ button:focus-visible {
 
 .aurora-blob {
   position: absolute;
-  width: 46rem;
-  height: 46rem;
+  width: 60rem;
+  height: 60rem;
   border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.62;
-  animation: floatBlob 13s ease-in-out infinite alternate;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: floatBlob 18s ease-in-out infinite alternate;
 }
 
 .blob-1 {
-  left: -10rem;
-  top: 4rem;
-  background: rgba(29, 78, 216, 0.42);
+  left: -15rem;
+  top: -10rem;
+  background: rgba(37, 99, 235, 0.5);
+  animation-duration: 20s;
 }
 
 .blob-2 {
-  right: -12rem;
-  top: 14rem;
-  background: rgba(56, 189, 248, 0.34);
-  animation-delay: -4s;
+  right: -10rem;
+  top: 20rem;
+  background: rgba(56, 189, 248, 0.4);
+  animation-delay: -6s;
+  animation-duration: 22s;
 }
 
 .blob-3 {
-  left: 32%;
-  bottom: -16rem;
-  background: rgba(14, 116, 144, 0.28);
-  animation-delay: -8s;
+  left: 25%;
+  bottom: -20rem;
+  background: rgba(14, 165, 233, 0.35);
+  animation-delay: -12s;
+  animation-duration: 24s;
+}
+
+.blob-4 {
+  right: 20%;
+  top: -5rem;
+  background: rgba(124, 58, 237, 0.3);
+  animation-delay: -3s;
+  animation-duration: 19s;
 }
 
 .grid-glow {
@@ -977,6 +988,114 @@ body[data-theme="light"] .theme-icon.sun {
   opacity: 0.8;
 }
 
+.github-stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.github-stat-card {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s ease;
+}
+
+.github-stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.spotify-card {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.spotify-album-art {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.spotify-offline-art {
+  background: linear-gradient(135deg, #1db954, #191414);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotify-offline-art::after {
+  content: '\f1bc';
+  font-family: 'Boxicons';
+  font-size: 4rem;
+  color: white;
+}
+
+.spotify-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.spotify-icon {
+  color: #1db954;
+  font-size: 2rem;
+  width: fit-content;
+}
+
+.spotify-info h3 {
+  color: var(--text-main);
+  font-size: 1.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-info p {
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-progress-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.spotify-progress {
+  height: 100%;
+  background: #1db954;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.5s linear;
+}
+
+@media (max-width: 768px) {
+  .spotify-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .spotify-album-art {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 .discord-activity {
   display: flex;
   gap: 1rem;
@@ -1371,6 +1490,18 @@ body[data-theme="light"] .footer {
   }
 }
 
+/* Scroll Animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1393,5 +1524,10 @@ body[data-theme="light"] .footer {
 
   .theme-gif-overlay {
     display: none;
+  }
+
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
