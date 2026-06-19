@@ -904,6 +904,134 @@ body[data-theme="light"] .theme-icon.sun {
   gap: 2rem;
 }
 
+.discord-profile {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.discord-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.discord-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-secondary);
+}
+
+.discord-status-indicator {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-dark);
+  background: #747f8d;
+}
+
+.discord-status-indicator.online {
+  background: #43b581;
+}
+
+.discord-status-indicator.idle {
+  background: #faa61a;
+}
+
+.discord-status-indicator.dnd {
+  background: #f04747;
+}
+
+.discord-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.discord-info h3 {
+  color: var(--text-main);
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.discord-info p {
+  color: var(--text-muted);
+  font-size: 1.6rem;
+}
+
+.discord-activity {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  flex: 1;
+  min-width: 0;
+}
+
+.discord-activity-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 0.8rem;
+  background: var(--panel-bright);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.discord-activity-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.discord-activity-name {
+  color: var(--accent-secondary);
+  font-weight: 900;
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.discord-activity-info {
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1024px) {
+  .discord-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .discord-activity {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .discord-activity {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .discord-activity-icon {
+    margin: 0 auto;
+  }
+}
+
 .social-card {
   min-height: 26rem;
   display: flex;

@@ -178,6 +178,93 @@ document.addEventListener("DOMContentLoaded", function () {
     typedTextSpan.textContent = textArray[0];
   }
 
+  // --- Lanyard Discord Profile ---
+  async function fetchLanyardData() {
+    try {
+      const response = await fetch('https://api.lanyard.rest/v1/users/959733702609494076');
+      const { success, data } = await response.json();
+      
+      if (success) {
+        updateDiscordProfile(data);
+      }
+    } catch (error) {
+      console.error('Error fetching Lanyard data:', error);
+    }
+  }
+
+  function updateDiscordProfile(data) {
+    const { discord_user, activities, discord_status } = data;
+    
+    // Update avatar
+    const avatarEl = document.getElementById('discord-avatar');
+    if (avatarEl && discord_user.avatar) {
+      avatarEl.src = `https://cdn.discordapp.com/avatars/${discord_user.id}/${discord_user.avatar}.png?size=256`;
+    }
+
+    // Update display name and username
+    const displayNameEl = document.getElementById('discord-display-name');
+    const usernameEl = document.getElementById('discord-username');
+    if (displayNameEl) {
+      displayNameEl.textContent = discord_user.global_name || discord_user.username;
+    }
+    if (usernameEl) {
+      usernameEl.textContent = `@${discord_user.username}`;
+    }
+
+    // Update status indicator
+    const statusIndicatorEl = document.getElementById('discord-status-indicator');
+    if (statusIndicatorEl) {
+      statusIndicatorEl.className = 'discord-status-indicator';
+      statusIndicatorEl.classList.add(discord_status);
+    }
+
+    // Update activity
+    const activityContainer = document.getElementById('discord-activity-container');
+    const activityIconEl = document.getElementById('discord-activity-icon');
+    const activityNameEl = document.getElementById('discord-activity-name');
+    const activityDetailsEl = document.getElementById('discord-activity-details');
+    const activityStateEl = document.getElementById('discord-activity-state');
+    
+    if (activities && activities.length > 0) {
+      const activity = activities[0];
+      
+      if (activityContainer) activityContainer.style.display = 'flex';
+      
+      if (activityIconEl && activity.assets) {
+        let largeImageUrl = null;
+        if (activity.assets.large_image) {
+          if (activity.assets.large_image.startsWith('mp:external')) {
+            // It's an external image URL, extract the actual URL
+            const externalUrlPart = activity.assets.large_image.split('/https/')[1];
+            if (externalUrlPart) {
+              largeImageUrl = 'https://' + externalUrlPart;
+            }
+          } else {
+            // It's a Discord application asset
+            largeImageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`;
+          }
+        }
+        
+        if (largeImageUrl) {
+          activityIconEl.style.backgroundImage = `url('${largeImageUrl}')`;
+        } else {
+          activityIconEl.style.backgroundImage = '';
+        }
+      }
+      
+      if (activityNameEl) activityNameEl.textContent = activity.name || 'No activity';
+      if (activityDetailsEl) activityDetailsEl.textContent = activity.details || '';
+      if (activityStateEl) activityStateEl.textContent = activity.state || '';
+    } else {
+      // No active activity
+      if (activityContainer) activityContainer.style.display = 'none';
+    }
+  }
+
+  // Fetch data immediately and every 15 seconds
+  fetchLanyardData();
+  setInterval(fetchLanyardData, 15000);
+
   // --- 3D Tilted Card & Bento Shimmer Effect ---
   // Using querySelectorAll for all cards tagged with data-tilt
   const tiltElements = document.querySelectorAll('.bento-card[data-tilt]');
