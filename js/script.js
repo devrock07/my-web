@@ -3,6 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window;
   const themeToggle = document.querySelector('#theme-toggle');
   const themeGifOverlay = document.querySelector('.theme-gif-overlay');
   const savedTheme = localStorage.getItem('theme');
@@ -30,10 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
         applyTheme(nextTheme);
       };
 
-      if (document.startViewTransition && !prefersReducedMotion) {
+      if (document.startViewTransition && !prefersReducedMotion && !isMobile) {
         window.__lastThemeTransitionMode = 'view-transition';
         document.startViewTransition(commitTheme);
-      } else if (themeGifOverlay && !prefersReducedMotion) {
+      } else if (themeGifOverlay && !prefersReducedMotion && !isMobile) {
         window.__lastThemeTransitionMode = 'gif-fallback';
         themeGifOverlay.classList.remove('is-running');
         void themeGifOverlay.offsetWidth;

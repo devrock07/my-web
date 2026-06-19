@@ -1084,6 +1084,20 @@ body[data-theme="light"] .theme-icon.sun {
   .cursor-outline {
     display: none;
   }
+
+  .theme-gif-overlay,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-gif-overlay,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    display: none;
+  }
 }
 
 body[data-theme="light"] .aurora-bg {
