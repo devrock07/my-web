@@ -765,6 +765,14 @@ body[data-theme="light"] .theme-icon.sun {
   filter: contrast(1.04) saturate(1.08);
 }
 
+.hero-showcase-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) saturate(1.08);
+}
+
 .portrait-badge {
   position: absolute;
   right: 2rem;
@@ -916,9 +924,18 @@ body[data-theme="light"] .theme-icon.sun {
 }
 
 .discord-profile {
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 3rem;
   align-items: center;
+  padding: clamp(3rem, 5vw, 5.2rem);
+}
+
+.discord-identity {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
 }
 
 .discord-avatar-container {
@@ -927,11 +944,12 @@ body[data-theme="light"] .theme-icon.sun {
 }
 
 .discord-avatar {
-  width: 120px;
-  height: 120px;
+  width: 12.4rem;
+  height: 12.4rem;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--accent-secondary);
+  box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.07), 0 22px 50px rgba(0, 0, 0, 0.28);
 }
 
 .discord-status-indicator {
@@ -962,6 +980,20 @@ body[data-theme="light"] .theme-icon.sun {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  min-width: 0;
+}
+
+.presence-kicker {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--accent-secondary);
+  font-size: 1.1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .discord-info h3 {
@@ -979,7 +1011,7 @@ body[data-theme="light"] .theme-icon.sun {
   margin-top: 0.5rem;
   font-style: italic;
   color: var(--text-muted);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
 }
 
 .discord-activity-time {
@@ -1021,6 +1053,7 @@ body[data-theme="light"] .theme-icon.sun {
   gap: 2rem;
   align-items: center;
   margin-top: 2rem;
+  overflow: hidden;
 }
 
 .spotify-album-art {
@@ -1062,9 +1095,10 @@ body[data-theme="light"] .theme-icon.sun {
 }
 
 .spotify-icon {
-  color: #2563eb;
-  font-size: 2rem;
+  color: var(--accent-secondary);
+  font-size: 2.1rem;
   width: fit-content;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.28));
 }
 
 .spotify-info h3 {
@@ -1095,7 +1129,7 @@ body[data-theme="light"] .theme-icon.sun {
 
 .spotify-progress {
   height: 100%;
-  background: #2563eb;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
   border-radius: 999px;
   width: 0%;
   transition: width 0.5s linear;
@@ -1105,7 +1139,7 @@ body[data-theme="light"] .theme-icon.sun {
   width: 120px;
   height: 120px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  background: linear-gradient(135deg, #07111f, #2563eb);
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
@@ -1117,7 +1151,7 @@ body[data-theme="light"] .theme-icon.sun {
 
 .spotify-album-art::after {
   content: '\f1bc';
-  font-family: 'Boxicons';
+  font-family: 'Font Awesome 6 Brands';
   font-size: 4rem;
   color: white;
   opacity: 0.7;
@@ -1128,7 +1162,7 @@ body[data-theme="light"] .theme-icon.sun {
 }
 
 .spotify-offline-art {
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  background: linear-gradient(135deg, #2563eb, #0f172a);
 }
 
 .spotify-offline-art::after {
@@ -1149,24 +1183,59 @@ body[data-theme="light"] .theme-icon.sun {
 
 .discord-activity {
   display: flex;
-  gap: 1rem;
+  gap: 1.4rem;
   align-items: center;
-  padding: 1.5rem;
-  border-radius: 1.2rem;
-  background: rgba(255,255,255,0.03);
+  padding: 2rem;
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.12), transparent 12rem),
+    rgba(255,255,255,0.035);
   border: 1px solid var(--glass-border);
   flex: 1;
   min-width: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.discord-activity.is-spotify {
+  border-color: rgba(56, 189, 248, 0.28);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.18), transparent 12rem),
+    rgba(255, 255, 255, 0.04);
 }
 
 .discord-activity-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 0.8rem;
-  background: var(--panel-bright);
+  position: relative;
+  width: 7.2rem;
+  height: 7.2rem;
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(51, 65, 85, 0.72));
   flex-shrink: 0;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.24);
+}
+
+.discord-activity-icon::after {
+  content: '\f1bc';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: 'Font Awesome 6 Brands';
+  font-size: 3.2rem;
+}
+
+.discord-activity-icon.has-art::after {
+  content: "";
+  inset: auto 0.6rem 0.6rem auto;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(2, 5, 11, 0.72);
 }
 
 .discord-activity-details {
@@ -1180,7 +1249,7 @@ body[data-theme="light"] .theme-icon.sun {
 .discord-activity-name {
   color: var(--accent-secondary);
   font-weight: 900;
-  font-size: 1.7rem;
+  font-size: 1.85rem;
   margin: 0;
 }
 
@@ -1195,8 +1264,12 @@ body[data-theme="light"] .theme-icon.sun {
 
 @media (max-width: 1024px) {
   .discord-profile {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     text-align: center;
+  }
+
+  .discord-identity {
+    justify-content: center;
   }
   
   .discord-activity {
@@ -1519,7 +1592,9 @@ body[data-theme="light"] .btn-icon {
 body[data-theme="light"] .about-intro h2,
 body[data-theme="light"] .skills-card h3,
 body[data-theme="light"] .stats-card h4,
-body[data-theme="light"] .social-card h4 {
+body[data-theme="light"] .social-card h4,
+body[data-theme="light"] .discord-info h3,
+body[data-theme="light"] .spotify-info h3 {
   color: #07111f;
 }
 
@@ -1527,8 +1602,38 @@ body[data-theme="light"] .about-intro p,
 body[data-theme="light"] .skills-card > p,
 body[data-theme="light"] .stats-card p,
 body[data-theme="light"] .social-card p,
+body[data-theme="light"] .discord-info p,
+body[data-theme="light"] .discord-activity-info,
+body[data-theme="light"] .spotify-info p,
 body[data-theme="light"] .footer {
   color: #334155;
+}
+
+body[data-theme="light"] .discord-activity {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(2, 132, 199, 0.1), transparent 12rem),
+    rgba(248, 251, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+body[data-theme="light"] .discord-activity.is-spotify {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(2, 132, 199, 0.14), transparent 12rem),
+    rgba(248, 251, 255, 0.95);
+  border-color: rgba(2, 132, 199, 0.24);
+}
+
+body[data-theme="light"] .discord-activity-icon {
+  background: linear-gradient(135deg, #dbeafe, #bae6fd);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+body[data-theme="light"] .discord-activity-icon.has-art::after {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.82);
+}
+
+body[data-theme="light"] .spotify-progress-container {
+  background: rgba(15, 23, 42, 0.12);
 }
 
 body[data-theme="light"] .footer {

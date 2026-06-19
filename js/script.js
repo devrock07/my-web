@@ -246,14 +246,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const activityTimeEl = document.getElementById('discord-activity-time');
     
     if (activities && activities.length > 0) {
-      const activity = activities[0];
+      const spotifyActivity = activities.find(activity => activity.name === 'Spotify');
+      const activity = spotifyActivity || activities[0];
       
-      if (activityContainer) activityContainer.style.display = 'flex';
+      if (activityContainer) {
+        activityContainer.style.display = 'flex';
+        activityContainer.classList.toggle('is-spotify', activity.name === 'Spotify');
+      }
       
       if (activityIconEl && activity.assets) {
         let largeImageUrl = null;
         if (activity.assets.large_image) {
-          if (activity.assets.large_image.startsWith('mp:external')) {
+          if (activity.assets.large_image.startsWith('spotify:')) {
+            largeImageUrl = `https://i.scdn.co/image/${activity.assets.large_image.replace('spotify:', '')}`;
+          } else if (activity.assets.large_image.startsWith('mp:external')) {
             // It's an external image URL, extract the actual URL
             const externalUrlPart = activity.assets.large_image.split('/https/')[1];
             if (externalUrlPart) {
@@ -264,12 +270,21 @@ document.addEventListener("DOMContentLoaded", function () {
             largeImageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`;
           }
         }
+
+        if (!largeImageUrl && activity.name === 'Spotify' && spotify && spotify.album_art_url) {
+          largeImageUrl = spotify.album_art_url;
+        }
         
         if (largeImageUrl) {
           activityIconEl.style.backgroundImage = `url('${largeImageUrl}')`;
+          activityIconEl.classList.add('has-art');
         } else {
           activityIconEl.style.backgroundImage = '';
+          activityIconEl.classList.remove('has-art');
         }
+      } else if (activityIconEl) {
+        activityIconEl.style.backgroundImage = '';
+        activityIconEl.classList.remove('has-art');
       }
       
       if (activityNameEl) activityNameEl.textContent = activity.name || 'No activity';
