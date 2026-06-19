@@ -3,6 +3,51 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const themeToggle = document.querySelector('#theme-toggle');
+  const themeGifOverlay = document.querySelector('.theme-gif-overlay');
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+
+  function applyTheme(theme) {
+    const isLight = theme === 'light';
+    document.documentElement.dataset.theme = theme;
+    document.body.dataset.theme = theme;
+
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+    }
+  }
+
+  applyTheme(initialTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+      const commitTheme = () => {
+        localStorage.setItem('theme', nextTheme);
+        applyTheme(nextTheme);
+      };
+
+      if (document.startViewTransition && !prefersReducedMotion) {
+        window.__lastThemeTransitionMode = 'view-transition';
+        document.startViewTransition(commitTheme);
+      } else if (themeGifOverlay && !prefersReducedMotion) {
+        window.__lastThemeTransitionMode = 'gif-fallback';
+        themeGifOverlay.classList.remove('is-running');
+        void themeGifOverlay.offsetWidth;
+        themeGifOverlay.classList.add('is-running');
+        setTimeout(commitTheme, 120);
+        setTimeout(() => {
+          themeGifOverlay.classList.remove('is-running');
+        }, 1800);
+      } else {
+        window.__lastThemeTransitionMode = 'plain';
+        commitTheme();
+      }
+    });
+  }
   
   // --- Custom Cursor & Aura Overlay ---
   const cursorDot = document.querySelector('.cursor-dot');
@@ -30,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if(cursorOutline) {
         cursorOutline.style.width = '60px';
         cursorOutline.style.height = '60px';
-        cursorOutline.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
+        cursorOutline.style.backgroundColor = 'rgba(56, 189, 248, 0.12)';
       }
     });
     el.addEventListener('pointerleave', () => {
